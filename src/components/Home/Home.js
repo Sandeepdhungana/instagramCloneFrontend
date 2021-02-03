@@ -9,7 +9,7 @@ import "../../styles/Home/Home.css";
 function Home() {
   return (
     <div className="home">
-      <Header />
+      {/* <Header /> */}
 
       <div className="home__body">
         <div className="home__body__left">
