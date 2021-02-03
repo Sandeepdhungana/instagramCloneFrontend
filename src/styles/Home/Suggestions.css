@@ -1,0 +1,43 @@
+.suggestion{
+    margin-top: 1rem;
+    display:flex;
+    width:100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.suggestion__left{
+    display:flex;
+    align-items: center;
+    flex: 1;
+    cursor: pointer;
+}
+.suggestion__right {
+    flex: 0.3;
+    cursor: pointer;
+}
+.suggestion__left > .suggestion__names {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+.suggestion__names > h5 {
+    font-weight: 600;
+}
+.suggestion__names {
+    font-weight: 400;
+}
+.suggestion__names > p {
+    color: #A2A2A2;
+    font-size: small;
+}
+.suggestion__right > p {
+    font-size: 0.8rem;
+    letter-spacing: 0.04rem;
+    color: #0095F6;
+}
+.suggestion__left > .MuiAvatar-root {
+    height: 30px;
+    width: 30px;
+}

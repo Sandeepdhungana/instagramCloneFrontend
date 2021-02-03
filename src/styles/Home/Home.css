@@ -1,0 +1,72 @@
+
+.home__body {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home__body__left {
+    flex: 1.7;
+    margin-right: 1.5rem;
+    height: 100vh;
+    overflow: auto;
+}
+.home__body__left::-webkit-scrollbar {
+    display: none;
+}
+
+
+.home__body__left::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.home__body__right {
+    padding: 1rem;
+    flex: 1;
+    margin-top: 2rem;
+    height: fit-content;
+    position: sticky;
+}
+.sidebarSuggestions {
+    display: flex;
+    color: #A2A2A2;
+    margin-top: 1.5rem;
+}
+.sidebarSuggestions > p {
+    flex: 0.3;
+    font-weight:500;
+    font-size: 0.8rem;
+    letter-spacing: 0.04rem;
+}
+.sidebarSuggestions > h4 {
+    flex: 1;
+    font-weight:600;
+    font-size: 0.9rem;
+    letter-spacing: 0.04rem;
+}
+.home__sidebarSuggested {
+    margin-top:1rem;
+}
+@media screen and (max-width:900px) {
+    .home__body {
+        width: 80%;
+    }
+
+    .home__body__left {
+        margin-right: 0;
+    }
+
+    .home__body__right {
+        display: none;
+    }
+}

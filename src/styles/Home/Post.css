@@ -1,0 +1,120 @@
+.post {
+    width: 100%;
+    margin-top: 2rem;
+    background: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin-bottom: 4rem;
+}
+
+.postCard {
+    display: flex;
+    flex-direction: column;
+}
+
+.post__top {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgray;
+}
+
+.post__top__right {
+    display: flex;
+    align-items: center;
+}
+
+.post__top__right>h4 {
+    margin-left: 1rem;
+    font-weight: 400;
+}
+
+.post__middle>img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.post__bottom__icons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post__addComment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post__addComment>input {
+    flex: 1
+}
+
+.post__bottom__icons {
+    display: flex;
+    flex: 1;
+    padding: 0.5rem 1rem;
+}
+
+.post__bottom__left {
+    display: flex;
+}
+
+.post__bottom__left__icons {
+    margin-right: 0.7rem;
+}
+
+.post__caption,
+.post__comment {
+    display: flex;
+    padding: 0 1rem 0.5rem 1rem;
+}
+
+.post__comment {
+    border-bottom: 1px solid lightgray;
+}
+
+.post__likes {
+    padding-left: 1rem;
+    font-weight: 500;
+}
+
+.post__caption>p,
+.post__comment>p {
+    margin-left: 0.5rem;
+}
+
+.post__caption>h4,
+.post__comment>h4 {
+    font-weight: 600;
+}
+
+.post__addComment {
+    display: flex;
+    height: 40px;
+    /* padding: 1rem; */
+}
+
+.post__addComment>input {
+    margin-left: 0.5rem;
+    height: 30px;
+    border: none;
+    outline-width: 0px;
+    background-color: #fff;
+}
+
+.post__addComment>button {
+    border: none;
+    font-weight: 700;
+    color: #0095F6;
+    padding: 3px;
+    margin-left: 2px;
+    height: 30px;
+    background: transparent;
+    opacity: 0.2;
+    outline: none;
+}
+
+.post__commentBox {
+    padding: 1rem;
+}
