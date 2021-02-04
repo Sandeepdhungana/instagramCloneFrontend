@@ -1,0 +1,21 @@
+.profile {
+    background: #fafafa;
+    padding: 25px;
+    padding-top: 40px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+
+
+
+@media screen and (max-width:900px) {
+
+    .profile {
+        width: 100%;
+    }
+}

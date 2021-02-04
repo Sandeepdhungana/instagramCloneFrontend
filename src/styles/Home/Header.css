@@ -8,16 +8,15 @@
 }
 
 .header__conatiner {
-    margin-top: 0.7rem;
     margin-bottom: 0.7rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 2px;
+    padding-top: 1rem;
     max-height: 40px;
     margin-left: auto;
     margin-right: auto;
-    width: 70%;
+    width: 60%;
 }
 
 .header__logo {
@@ -34,6 +33,8 @@
     outline-width: 0;
     border: none;
     background: #FAFAFA;
+    height: inherit;
+    border-radius: 5px;
 }
 
 .header__search {
@@ -41,9 +42,7 @@
     align-items: center;
     border: 1px solid lightgray;
     border-radius: 5px;
-    padding: 2px;
     justify-self: center;
-    height: 29px;
     background: #FAFAFA;
     width: 13rem;
 }
