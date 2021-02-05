@@ -26,7 +26,7 @@ function Post() {
           <img
             alt="Photo by Routine of Nepal (RONB) on January 29, 2021. Image may contain: 1 person, beard."
             sizes="600px"
-            srcset="https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=cdd857906f90cd6d8e532199b48f6289&amp;oe=60417C7A 640w,https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/e35/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=7619f0e588fd0fab97fe1a858f5998e6&amp;oe=60432C44 750w,https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/e35/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=7619f0e588fd0fab97fe1a858f5998e6&amp;oe=60432C44 1080w"
+            srcSet="https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=cdd857906f90cd6d8e532199b48f6289&amp;oe=60417C7A 640w,https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/e35/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=7619f0e588fd0fab97fe1a858f5998e6&amp;oe=60432C44 750w,https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/e35/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=7619f0e588fd0fab97fe1a858f5998e6&amp;oe=60432C44 1080w"
             src="https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/e35/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=7619f0e588fd0fab97fe1a858f5998e6&amp;oe=60432C44"
           />
         </div>
@@ -41,9 +41,9 @@ function Post() {
               <div className="post__bottom__left__icons">
                 <svg fill="#262626" height="24" viewBox="0 0 48 48" width="24">
                   <path
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                     d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
-                    fill-rule="evenodd"
+                    fillRule ="evenodd"
                   ></path>
                 </svg>
               </div>

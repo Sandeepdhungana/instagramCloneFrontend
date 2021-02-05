@@ -2,17 +2,18 @@
     display: flex;
     background: #fafafa;
 }
- 
+
 .profiletop__circularImage {
     display: flex;
     width: 35%;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
-.profiletop__circularImage > img {
+
+.profiletop__circularImage>img {
     object-fit: contain;
     height: 8.8rem;
-    border-radius:50%
+    border-radius: 50%
 }
 
 .profiletop__info {
@@ -26,19 +27,23 @@
     align-items: center;
     flex: 0.25;
 }
-.profiletop__names > p {
+
+.profiletop__names>p {
     font-size: 1.5rem;
     /* font-weight: 300; */
     letter-spacing: 0.1rem;
     color: #8C8471;
 }
-.profiletop__names > button {
+
+.profiletop__names>a>button {
     border: 1px solid lightgray;
     background: white;
     padding: 0.4rem;
     word-spacing: 0.1rem;
     font-weight: 600;
     border-radius: 4px;
+    outline: 0;
+    cursor: pointer;
 }
 
 .profiletop__numbers {
@@ -48,25 +53,30 @@
     margin-top: 1.5rem;
     padding-bottom: 1rem;
 }
-.profiletop__numbers >p> span {
+
+.profiletop__numbers>p>span {
     font-weight: 600;
     font-size: 0.8rem;
 }
+
 .profiletop__bios {
     margin-top: 0.5rem;
 }
-.profiletop__bios > .profiletop__name {
+
+.profiletop__bios>.profiletop__name {
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 0.2rem;
 }
+
 @media screen and (max-width:594px) {
     .profiletop {
         display: flex;
         flex-direction: column;
         background: #fafafa;
     }
-    .profiletop__names > p {
+
+    .profiletop__names>p {
         font-size: 1.2rem;
         /* font-weight: 300; */
         letter-spacing: 0.1rem;

@@ -1,5 +1,4 @@
 import Suggestion from "./Suggestion";
-import Header from "./Header";
 import Story from "./Story";
 import Post from "./Post";
 import SideBar from "./SideBar";

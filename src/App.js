@@ -4,6 +4,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./components/Home/Header";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
+import CreatePost from "./components/CreatePost/CreatePost";
+import Signup from "./components/Signup/Signup";
 
 function App() {
   return (
@@ -13,14 +15,18 @@ function App() {
         <Home />
       </Route>
       <Route exact path="/login">
-        <Login name="login" />
+        <Login/>
       </Route>
       <Route exact path="/signup">
-        <Login name="signup" />
+        <Signup/>
       </Route>
       <Route exact path="/profile">
         <Header />
         <Profile />
+      </Route>
+      <Route exact path="/createpost">
+        <Header />
+        <CreatePost />
       </Route>
     </BrowserRouter>
   );

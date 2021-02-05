@@ -4,6 +4,7 @@
     cursor: pointer;
     margin-bottom: 1.3rem;
     object-fit: cover;
+    position: relative;
 }
 .image > img:hover {
     filter: brightness(50%); 

@@ -23,7 +23,9 @@
 }
 
 .suggestion__names > h5 {
+    color: black;
     font-weight: 600;
+    margin-bottom: 0.4rem;
 }
 .suggestion__names {
     font-weight: 400;
