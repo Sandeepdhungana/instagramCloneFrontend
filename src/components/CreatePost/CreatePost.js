@@ -10,50 +10,61 @@ function CreatePost() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
-  const [url, setUrl] = useState("");
+  // const [url, setUrl] = useState("");
 
-  const notify = () => {
-    toast.success("Successfully posted.");
+  const notify = (message, func) => {
+    func(message);
   };
-  console.log(url);
-  const postDetails = async () => {
+  const postDetails = () => {
+    document.querySelector("#disable").disable = true;
+    document.querySelector("#disable").innerHTML = "Posting...";
+    document.querySelector("#disable").style.backgroundColor = "#B2DFFC";
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "instagram-clone");
     data.append("cloud_name", "sandeepsush");
 
-    await axios
+    axios
       .post("https://api.cloudinary.com/v1_1/sandeepsush/image/upload", data)
       .then(function (response) {
-        setUrl(response.data.url);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    var postData = {
-      title,
-      body,
-      picUrl: url,
-    };
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        "authorization": `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+        var postData = {
+          title,
+          body,
+          picUrl: response.data.url,
+        };
+        let axiosConfig = {
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+            authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        };
 
-    axios
-      .post("http://localhost:5000/createpost", postData, axiosConfig)
-      .then((res) => {
-        console.log("RESPONSE RECEIVED: ", res);
-        notify();
-        history.push('/')
+        axios
+          .post("http://localhost:5000/createpost", postData, axiosConfig)
+          .then((res) => {
+            console.log("RESPONSE RECEIVED: ", res);
+            notify("Successfully posted.", toast.success);
+            history.push("/");
+          })
+          .catch((err) => {
+            console.log("AXIOS ERROR: ", err);
+            notify("add to all the fields", toast.error);
+            document.querySelector("#disable").disable = false;
+            document.querySelector("#disable").innerHTML = "Post";
+            document.querySelector("#disable").style.backgroundColor =
+              "#0095F6";
+          });
       })
-      .catch((err) => {
-        console.log("AXIOS ERROR: ", err);
+      .catch(function (err) {
+        console.log(err);
+        notify("add to all the fields", toast.error);
+        document.querySelector("#disable").disable = false;
+        document.querySelector("#disable").innerHTML = "Post";
+        document.querySelector("#disable").style.backgroundColor = "#0095F6";
       });
   };
+
   // axios.defaults.headers.common["authorization"] = localStorage.getItem("jwt")
 
   return (
@@ -83,6 +94,7 @@ function CreatePost() {
         </div>
         <div className="btn">
           <button
+            id="disable"
             type="submit"
             onClick={() => {
               postDetails();

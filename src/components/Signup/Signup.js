@@ -17,10 +17,7 @@ function Signup({ name }) {
   const [username, setUsername] = useState("");
   const [fullName, setFullname] = useState("");
   const [password, setPassword] = useState("");
-  console.log(email);
-  console.log(username);
-  console.log(fullName);
-  console.log(password);
+ 
 
   // making a post request to the server.
   const postData = () => {

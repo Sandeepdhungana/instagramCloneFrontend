@@ -4,8 +4,12 @@ import React from "react";
 import "../../styles/Home/Post.css";
 import MoreHorizOutlinedIcon from "@material-ui/icons/MoreHorizOutlined";
 
-function Post() {
- 
+function Post({title,body,photos,postby}) {
+  // title={postsData.title}
+  // body={postsData.body}
+  // photos={postsData.photo}
+  // postby={postsData.postedBy}
+  console.log("name is",postby.name);
 
   return (
     <div className="post">
@@ -16,7 +20,7 @@ function Post() {
               style={{ height: "30px", width: "30px" }}
               src="https://lh3.googleusercontent.com/ogw/ADGmqu-lQVDQ664n3hHOX9mei3bfeLJDG90xlCYNCG--kw=s32-c-mo"
             />
-            <h4>sandeep</h4>
+            <h4>{postby.name}</h4>
           </div>
           <div className="post__top__left">
             <MoreHorizOutlinedIcon />
@@ -26,8 +30,7 @@ function Post() {
           <img
             alt="Photo by Routine of Nepal (RONB) on January 29, 2021. Image may contain: 1 person, beard."
             sizes="600px"
-            srcSet="https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/sh0.08/e35/s640x640/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=cdd857906f90cd6d8e532199b48f6289&amp;oe=60417C7A 640w,https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/e35/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=7619f0e588fd0fab97fe1a858f5998e6&amp;oe=60432C44 750w,https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/e35/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=7619f0e588fd0fab97fe1a858f5998e6&amp;oe=60432C44 1080w"
-            src="https://instagram.fblr1-5.fna.fbcdn.net/v/t51.2885-15/e35/143241305_111031447618671_7831711139808689149_n.jpg?_nc_ht=instagram.fblr1-5.fna.fbcdn.net&amp;_nc_cat=103&amp;_nc_ohc=wXFOsSzmiDQAX8LCeBi&amp;tp=1&amp;oh=7619f0e588fd0fab97fe1a858f5998e6&amp;oe=60432C44"
+            src={photos}
           />
         </div>
         <div className="post__bottom">
@@ -65,7 +68,10 @@ function Post() {
 
           <div className="post__caption">
             <h4>sandeep</h4>
-            <p>This is my caption</p>
+            <p>{body}</p>
+          </div>
+          <div className="post__commentline post__caption">
+            <p>Comments</p>
           </div>
           <div className="post__comment">
             <h4>kushal</h4>
