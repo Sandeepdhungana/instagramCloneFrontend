@@ -1,15 +1,47 @@
-import React from 'react'
-import '../../styles/Profile/Profile.css'
-import ProfileGallery from './ProfileGallery'
-import ProfileTop from './ProfileTop'
+import React, { useEffect, useState } from "react";
+import "../../styles/Profile/Profile.css";
+import ProfileGallery from "./ProfileGallery";
+import ProfileTop from "./ProfileTop";
+import axios from "axios";
+import {useStateValue} from '../../Reducers/StateProvider'
+
 
 function Profile() {
-    return (
-        <div className="profile">
-            <ProfileTop />
-            <ProfileGallery />
-        </div>
-    )
+  const [username, setUsername] = useState();
+  const [name, setName] = useState();
+  const [state, dispatch] = useStateValue();
+
+  useEffect(() => {
+    const det = JSON.parse(localStorage.getItem("user"));
+    setUsername(det?.username)
+    setName(det?.name)
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    };
+
+    axios
+      .get("http://localhost:5000/mypost", axiosConfig)
+      .then((res) => {
+        console.log(res.data.myPost);
+        dispatch({
+            type:"MY_POST",
+            myposts:res.data.myPost
+        })
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      });
+  }, []);
+  return (
+    <div className="profile">
+      <ProfileTop name={name} username={username}/>
+      <ProfileGallery />
+    </div>
+  );
 }
 
-export default Profile
+export default Profile;

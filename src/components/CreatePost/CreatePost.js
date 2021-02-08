@@ -11,10 +11,17 @@ function CreatePost() {
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
   // const [url, setUrl] = useState("");
-
   const notify = (message, func) => {
     func(message);
   };
+  const logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("jwt");
+    history.push('/login');
+    notify("Logged out succesfully",toast.success)
+  }
+
+  
   const postDetails = () => {
     document.querySelector("#disable").disable = true;
     document.querySelector("#disable").innerHTML = "Posting...";
@@ -110,6 +117,15 @@ function CreatePost() {
             }}
           >
             Go Back
+          </button>
+        </div>
+        <div className="btn">
+          <button
+            onClick={() => {
+              logout();
+            }}
+          >
+            Logout
           </button>
         </div>
       </div>

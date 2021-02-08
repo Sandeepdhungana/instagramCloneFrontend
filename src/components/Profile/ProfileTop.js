@@ -1,8 +1,10 @@
 import React from "react";
 import "../../styles/Profile/ProfileTop.css";
 import { Link } from "react-router-dom";
+import { useStateValue } from "../../Reducers/StateProvider";
 
-function ProfileTop() {
+function ProfileTop({name, username}) {
+  const [{myPost}, dispatch] = useStateValue();
   return (
     <div className="profiletop">
       <div className="profiletop__circularImage">
@@ -13,7 +15,7 @@ function ProfileTop() {
       </div>
       <div className="profiletop__info">
         <div className="profiletop__names">
-          <p>hriddhidhungana</p>
+          <p>{username}</p>
           <Link to="/createpost">
             <button>Edit profile</button>
           </Link>
@@ -34,7 +36,7 @@ function ProfileTop() {
         </div>
         <div className="profiletop__numbers">
           <p>
-            <span>5</span> posts
+            <span>{myPost.length}</span> posts
           </p>
           <p>
             <span>101</span> followers
@@ -44,7 +46,7 @@ function ProfileTop() {
           </p>
         </div>
         <div className="profiletop__bios">
-          <p className="profiletop__name">Sandeep</p>
+          <p className="profiletop__name">{name}</p>
           <p className="profiletop__bio">
             I hope Karma slaps you in the face right before I do!
           </p>

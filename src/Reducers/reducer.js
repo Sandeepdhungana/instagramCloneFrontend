@@ -1,5 +1,6 @@
 export const initialState = {
   posts: [],
+  myPost:[]
 };
 
 // selector
@@ -11,6 +12,11 @@ const reducer = (state, action) => {
         ...state,
         posts: action.posts
       };
+    case "MY_POST":
+       return {
+        ...state,
+        myPost: action.myposts
+       }
     default:
       return state;
   }
