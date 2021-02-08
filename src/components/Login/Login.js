@@ -28,7 +28,7 @@ function Login() {
         password,
       })
       .then((response) => {
-        console.log(response.data.user);
+        
         localStorage.setItem("jwt",response.data.token);
         localStorage.setItem("user",JSON.stringify(response.data.user));
         history.push("/");

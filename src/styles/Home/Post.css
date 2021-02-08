@@ -19,7 +19,9 @@
     justify-content: space-between;
     border-bottom: 1px solid lightgray;
 }
-
+svg {
+    cursor: pointer;
+}
 .post__top__right {
     display: flex;
     align-items: center;
