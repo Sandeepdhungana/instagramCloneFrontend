@@ -73,7 +73,7 @@ svg {
 }
 
 .post__comment {
-    border-bottom: 1px solid lightgray;
+    /* border-bottom: 1px solid lightgray; */
 }
 
 .post__likes {
@@ -108,15 +108,34 @@ svg {
 .post__addComment>button {
     border: none;
     font-weight: 700;
-    color: #0095F6;
+    color: #CCEBFD;
     padding: 3px;
     margin-left: 2px;
     height: 30px;
     background: transparent;
-    opacity: 0.2;
     outline: none;
+    cursor: pointer;
 }
 
 .post__commentBox {
+    border-top: 1px solid lightgray;
     padding: 1rem;
+}
+
+.post__viewer>h4 {
+    cursor: pointer;
+    color: lightgray;
+    margin-bottom: 10px;
+}
+.post__viewer {
+    display: flex;
+    align-items: left;
+    justify-content: flex-start;
+    margin-left: 1rem;
+}
+.post__commentline>.post__viewer {
+    display: flex;
+    align-items: left;
+    justify-content: flex-start;
+    margin-left: 0rem !important;
 }

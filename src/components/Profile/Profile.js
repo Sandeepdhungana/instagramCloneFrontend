@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import "../../styles/Profile/Profile.css";
 import ProfileGallery from "./ProfileGallery";
@@ -26,7 +28,6 @@ function Profile() {
     axios
       .get("http://localhost:5000/mypost", axiosConfig)
       .then((res) => {
-        console.log(res.data.myPost);
         dispatch({
             type:"MY_POST",
             myposts:res.data.myPost

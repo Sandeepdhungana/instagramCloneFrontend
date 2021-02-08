@@ -5,10 +5,59 @@ import "../../styles/Home/Post.css";
 import MoreHorizOutlinedIcon from "@material-ui/icons/MoreHorizOutlined";
 import axios from "axios";
 
-function Post({ title, body, photos, postby, _id, like }) {
+function Post({ title, body, photos, postby, _id, like,comments }) {
   const [liked, setLiked] = useState(like.includes(JSON.parse(localStorage.getItem("user"))._id))
+  const [comment, setComment] = useState("")
+  const [colors, setColors] = useState({
+    color:"#CCEBFD"
+  })
+
+  const [commentno, setCommentno] = useState(3);
+  const [vactive, setVactive] = useState(false);
+  const [message, setMessage] = useState("View More..")
+
+  const viewMore = () => {
+    setMessage("View Less..")
+    setVactive(true)
+    setCommentno(comments.length)
+  }
+  
+  const viewLess = () => {
+    setMessage("View More..")
+    setVactive(false)
+    setCommentno(3);
+  }
+  
+  const postComment = (_id) => {
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    };
+    var post = {
+      text:comment,
+      _id,
+    };
+    
+    axios
+      .put("http://localhost:5000/comments", post, axiosConfig)
+      .then((res) => {
+        
+        console.log("RESPONSE RECEIVED: ", res.comments);
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      });
+      setColors({
+        color:"#CCEBFD"
+      })
+      setComment("");
+  }
   const likepost = (_id) => {
     setLiked(true)
+    
     
     let axiosConfig = {
       headers: {
@@ -32,7 +81,7 @@ function Post({ title, body, photos, postby, _id, like }) {
   }
   const unlikepost = (_id) => {
     setLiked(false)
-   
+    
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -63,7 +112,7 @@ function Post({ title, body, photos, postby, _id, like }) {
               style={{ height: "30px", width: "30px" }}
               src="https://lh3.googleusercontent.com/ogw/ADGmqu-lQVDQ664n3hHOX9mei3bfeLJDG90xlCYNCG--kw=s32-c-mo"
             />
-            <h4>{postby.name}</h4>
+            <h4>{postby?.name}</h4>
           </div>
           <div className="post__top__left">
             <MoreHorizOutlinedIcon />
@@ -82,11 +131,9 @@ function Post({ title, body, photos, postby, _id, like }) {
               <div className="post__bottom__left__icons">
                 <svg
                   onClick={() => {
-                    // liked = !liked;
                     liked ? unlikepost(_id) : likepost(_id);
-                    // liked = !liked;
                   }}
-                  fill="#262626"
+                  fill={liked?"red":"black"}
                   height="24"
                   viewBox="0 0 48 48"
                   width="24"
@@ -120,15 +167,23 @@ function Post({ title, body, photos, postby, _id, like }) {
           </div>
 
           <div className="post__caption">
-            <h4>sandeep</h4>
+            <h4>{postby?.name}</h4>
             <p>{body}</p>
           </div>
           <div className="post__commentline post__caption">
-            <p>Comments</p>
+            <div className="post__viewer">{comments?.length?<h4>Comments</h4>:""}</div>
           </div>
-          <div className="post__comment">
-            <h4>kushal</h4>
-            <p>This is my comment</p>
+          {comments.slice(0,commentno).map((comment,index) => {
+            
+            return (<div key={index} className="post__comment">
+            <h4>{comment.postedBy?.name}</h4>
+            <p>{comment.text}</p>
+          </div>)
+          })}
+          <div className="post__viewer">
+          <h4 onClick={() => { 
+            vactive?viewLess():viewMore();
+          }}>{message}</h4>
           </div>
           <div className="post__commentBox">
             <div className="post__addComment">
@@ -136,8 +191,19 @@ function Post({ title, body, photos, postby, _id, like }) {
                 <path d="M24 48C10.8 48 0 37.2 0 24S10.8 0 24 0s24 10.8 24 24-10.8 24-24 24zm0-45C12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21S35.6 3 24 3z"></path>
                 <path d="M34.9 24c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm-21.8 0c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5zM24 37.3c-5.2 0-8-3.5-8.2-3.7-.5-.6-.4-1.6.2-2.1.6-.5 1.6-.4 2.1.2.1.1 2.1 2.5 5.8 2.5 3.7 0 5.8-2.5 5.8-2.5.5-.6 1.5-.7 2.1-.2.6.5.7 1.5.2 2.1 0 .2-2.8 3.7-8 3.7z"></path>
               </svg>
-              <input placeholder="Add a comment..." />
-              <button>Post</button>
+              <input placeholder="Add a comment..." value={comment} onChange={(e) => {
+                setComment(e.target.value)
+                if(!e.target.value) {
+
+                return setColors({
+                  color:"#CCEBFD"
+                })
+                }
+                setColors({
+                  color:"#009DF7"
+                })
+              }}/>
+              <button style={colors} onClick={() => comment && postComment(_id)}>Post</button>
             </div>
           </div>
         </div>
