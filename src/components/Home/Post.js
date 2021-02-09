@@ -4,30 +4,37 @@ import React, { useState } from "react";
 import "../../styles/Home/Post.css";
 import MoreHorizOutlinedIcon from "@material-ui/icons/MoreHorizOutlined";
 import axios from "axios";
+import Modal from "./Modal";
 
-function Post({ title, body, photos, postby, _id, like,comments }) {
-  const [liked, setLiked] = useState(like.includes(JSON.parse(localStorage.getItem("user"))._id))
-  const [comment, setComment] = useState("")
+function Post({ title, body, photos, postby, _id, like, comments }) {
+  const [areSameUser, setareSameUser] = useState(
+    postby._id === JSON.parse(localStorage.getItem("user"))._id
+  );
+  const [liked, setLiked] = useState(
+    like.includes(JSON.parse(localStorage.getItem("user"))._id)
+  );
+  const [comment, setComment] = useState("");
   const [colors, setColors] = useState({
-    color:"#CCEBFD"
-  })
+    color: "#CCEBFD",
+  });
 
   const [commentno, setCommentno] = useState(3);
   const [vactive, setVactive] = useState(false);
-  const [message, setMessage] = useState("View More..")
+  const [message, setMessage] = useState("View More..");
+  const [isOpened, setIsOpened] = useState(false);
 
   const viewMore = () => {
-    setMessage("View Less..")
-    setVactive(true)
-    setCommentno(comments.length)
-  }
-  
+    setMessage("View Less..");
+    setVactive(true);
+    setCommentno(comments.length);
+  };
+
   const viewLess = () => {
-    setMessage("View More..")
-    setVactive(false)
+    setMessage("View More..");
+    setVactive(false);
     setCommentno(3);
-  }
-  
+  };
+
   const postComment = (_id) => {
     let axiosConfig = {
       headers: {
@@ -37,28 +44,26 @@ function Post({ title, body, photos, postby, _id, like,comments }) {
       },
     };
     var post = {
-      text:comment,
+      text: comment,
       _id,
     };
-    
+
     axios
       .put("http://localhost:5000/comments", post, axiosConfig)
       .then((res) => {
-        
         console.log("RESPONSE RECEIVED: ", res.comments);
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
       });
-      setColors({
-        color:"#CCEBFD"
-      })
-      setComment("");
-  }
+    setColors({
+      color: "#CCEBFD",
+    });
+    setComment("");
+  };
   const likepost = (_id) => {
-    setLiked(true)
-    
-    
+    setLiked(true);
+
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -72,16 +77,15 @@ function Post({ title, body, photos, postby, _id, like,comments }) {
     axios
       .put("http://localhost:5000/like", postId, axiosConfig)
       .then((res) => {
-        
         console.log("RESPONSE RECEIVED: ", res);
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
       });
-  }
+  };
   const unlikepost = (_id) => {
-    setLiked(false)
-    
+    setLiked(false);
+
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -101,7 +105,32 @@ function Post({ title, body, photos, postby, _id, like,comments }) {
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
       });
-  }
+  };
+  const openModal = () => {
+    setIsOpened(!isOpened);
+  };
+  const closeModal = () => {
+    setIsOpened(false);
+  };
+  const deletePost = (id) => {
+    console.log(id);
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    };
+
+    axios
+      .delete(`http://localhost:5000/delete/${id}`, axiosConfig)
+      .then((res) => {
+        console.log("RESPONSE RECEIVED: ", res);
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      });
+  };
 
   return (
     <div className="post">
@@ -115,7 +144,20 @@ function Post({ title, body, photos, postby, _id, like,comments }) {
             <h4>{postby?.name}</h4>
           </div>
           <div className="post__top__left">
-            <MoreHorizOutlinedIcon />
+            {areSameUser && (
+              <div onClick={() => openModal()} className="threedots">
+                <MoreHorizOutlinedIcon />
+              </div>
+            )}
+            {isOpened ? (
+              <Modal
+                closeModal={closeModal}
+                _id={_id}
+                deletePost={deletePost}
+              />
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="post__middle">
@@ -133,7 +175,7 @@ function Post({ title, body, photos, postby, _id, like,comments }) {
                   onClick={() => {
                     liked ? unlikepost(_id) : likepost(_id);
                   }}
-                  fill={liked?"red":"black"}
+                  fill={liked ? "red" : "black"}
                   height="24"
                   viewBox="0 0 48 48"
                   width="24"
@@ -171,19 +213,26 @@ function Post({ title, body, photos, postby, _id, like,comments }) {
             <p>{body}</p>
           </div>
           <div className="post__commentline post__caption">
-            <div className="post__viewer">{comments?.length?<h4>Comments</h4>:""}</div>
+            <div className="post__viewer">
+              {comments?.length ? <h4>Comments</h4> : ""}
+            </div>
           </div>
-          {comments.slice(0,commentno).map((comment,index) => {
-            
-            return (<div key={index} className="post__comment">
-            <h4>{comment.postedBy?.name}</h4>
-            <p>{comment.text}</p>
-          </div>)
+          {comments.slice(0, commentno).map((comment, index) => {
+            return (
+              <div key={index} className="post__comment">
+                <h4>{comment.postedBy?.name}</h4>
+                <p>{comment.text}</p>
+              </div>
+            );
           })}
           <div className="post__viewer">
-          <h4 onClick={() => { 
-            vactive?viewLess():viewMore();
-          }}>{message}</h4>
+            <h4
+              onClick={() => {
+                vactive ? viewLess() : viewMore();
+              }}
+            >
+              {message}
+            </h4>
           </div>
           <div className="post__commentBox">
             <div className="post__addComment">
@@ -191,19 +240,27 @@ function Post({ title, body, photos, postby, _id, like,comments }) {
                 <path d="M24 48C10.8 48 0 37.2 0 24S10.8 0 24 0s24 10.8 24 24-10.8 24-24 24zm0-45C12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21S35.6 3 24 3z"></path>
                 <path d="M34.9 24c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm-21.8 0c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5zM24 37.3c-5.2 0-8-3.5-8.2-3.7-.5-.6-.4-1.6.2-2.1.6-.5 1.6-.4 2.1.2.1.1 2.1 2.5 5.8 2.5 3.7 0 5.8-2.5 5.8-2.5.5-.6 1.5-.7 2.1-.2.6.5.7 1.5.2 2.1 0 .2-2.8 3.7-8 3.7z"></path>
               </svg>
-              <input placeholder="Add a comment..." value={comment} onChange={(e) => {
-                setComment(e.target.value)
-                if(!e.target.value) {
-
-                return setColors({
-                  color:"#CCEBFD"
-                })
-                }
-                setColors({
-                  color:"#009DF7"
-                })
-              }}/>
-              <button style={colors} onClick={() => comment && postComment(_id)}>Post</button>
+              <input
+                placeholder="Add a comment..."
+                value={comment}
+                onChange={(e) => {
+                  setComment(e.target.value);
+                  if (!e.target.value) {
+                    return setColors({
+                      color: "#CCEBFD",
+                    });
+                  }
+                  setColors({
+                    color: "#009DF7",
+                  });
+                }}
+              />
+              <button
+                style={colors}
+                onClick={() => comment && postComment(_id)}
+              >
+                Post
+              </button>
             </div>
           </div>
         </div>

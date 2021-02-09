@@ -1,0 +1,22 @@
+.modal {
+    background: white;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    align-items: center;
+    padding-left: 2px;
+}
+.modal >.MuiSvgIcon-root {
+    font-size: 12px;
+    
+}
+.modal >.close {
+    margin-top:6px;
+}
+.modal > p {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid lightgray;
+    cursor: pointer;
+}
