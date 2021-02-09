@@ -21,7 +21,6 @@ function ProfileTop({name, username}) {
             <button>Edit profile</button>
           </Link>
           <svg
-            aria-label="Options"
             fill="#262626"
             height="24"
             viewBox="0 0 48 48"

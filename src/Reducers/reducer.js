@@ -1,6 +1,7 @@
 export const initialState = {
   posts: [],
-  myPost:[]
+  myPost:[],
+  allusers: []
 };
 
 // selector
@@ -16,6 +17,11 @@ const reducer = (state, action) => {
        return {
         ...state,
         myPost: action.myposts
+       }
+    case "ALL_USERS":
+       return {
+        ...state,
+        allusers: action.allusers
        }
     default:
       return state;

@@ -26,6 +26,7 @@
     color: black;
     font-weight: 600;
     margin-bottom: 0.4rem;
+    align-self: end;
 }
 .suggestion__names {
     font-weight: 400;
