@@ -1,4 +1,5 @@
 import { Avatar } from "@material-ui/core";
+import {Link} from 'react-router-dom';
 import React from "react";
 import "../../styles/Home/Sidebar.css";
 
@@ -11,8 +12,8 @@ function SideBar() {
         <div className="sidebar__left">
             <Avatar src="https://lh3.googleusercontent.com/ogw/ADGmqu-lQVDQ664n3hHOX9mei3bfeLJDG90xlCYNCG--kw=s32-c-mo" />
             <div className="sidebar__names">
-                <h5>{me.name}</h5>
-               <p>{me.username}</p>
+                <Link to="/profile"><h5>{me?.name}</h5></Link>
+               <p>{me?.username}</p>
             </div>
         </div>
         <div className="sidebar__right">

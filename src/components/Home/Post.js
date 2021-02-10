@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { Avatar } from "@material-ui/core";
 import React, { useState } from "react";

@@ -4,8 +4,9 @@ import "../../styles/Profile/ProfileTop.css";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../Reducers/StateProvider";
 
-function ProfileTop({name, username}) {
-  const [{myPost}, dispatch] = useStateValue();
+function UProfileTop({name, username}) {
+  const [{userpost, userinfo}] = useStateValue();
+  
   return (
     <div className="profiletop">
       <div className="profiletop__circularImage">
@@ -17,9 +18,7 @@ function ProfileTop({name, username}) {
       <div className="profiletop__info">
         <div className="profiletop__names">
           <p>{username}</p>
-          <Link to="/createpost">
-            <button>Edit profile</button>
-          </Link>
+            <div className="followButton"><button>Follow</button></div>
           <svg
             fill="#262626"
             height="24"
@@ -35,7 +34,7 @@ function ProfileTop({name, username}) {
         </div>
         <div className="profiletop__numbers">
           <p>
-            <span>{myPost?.length}</span> posts
+            <span>{userpost?.length}</span> posts
           </p>
           <p>
             <span>101</span> followers
@@ -55,4 +54,4 @@ function ProfileTop({name, username}) {
   );
 }
 
-export default ProfileTop;
+export default UProfileTop;

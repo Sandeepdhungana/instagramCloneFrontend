@@ -1,9 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import "./App.css";
 import Home from "./components/Home/Home";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import Header from "./components/Home/Header";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
+import UProfile from "./components/UserProfile/UProfile";
 import CreatePost from "./components/CreatePost/CreatePost";
 import Signup from "./components/Signup/Signup";
 import { useEffect } from "react";
@@ -69,6 +72,10 @@ const Routing = () => {
       <Route exact path="/profile">
         <Header />
         <Profile />
+      </Route>
+      <Route exact path="/profile/:userId">
+        <Header />
+        <UProfile />
       </Route>
       <Route exact path="/createpost">
         <Header />

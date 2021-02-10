@@ -21,8 +21,11 @@
     flex-direction: column;
     margin-left: 1rem;
 }
-
-.suggestion__names > h5 {
+a{
+    text-decoration:none;
+    display: flex;
+}
+.suggestion__names>a > h5 {
     color: black;
     font-weight: 600;
     margin-bottom: 0.4rem;
@@ -40,7 +43,7 @@
     letter-spacing: 0.04rem;
     color: #0095F6;
 }
-.suggestion__left > .MuiAvatar-root {
+.suggestion__left > a> .MuiAvatar-root {
     height: 30px;
     width: 30px;
 }

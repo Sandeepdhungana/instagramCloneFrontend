@@ -7,10 +7,9 @@ import { useStateValue } from "../../Reducers/StateProvider";
 import axios from 'axios';
 import { useEffect } from "react";
 
-function Home() {
+function Home({openProfile}) {
   const [{ posts, allusers }, dispatch] = useStateValue();
-  console.log(allusers[0]?._id);
-  console.log(allusers[0]?.name);
+
   useEffect(() => {
     let axiosConfig = {
       headers: {
@@ -63,7 +62,7 @@ function Home() {
           </div>
           {allusers?.slice(0,5).map((users,index) => {
             return (
-              <Suggestion key = {users._id} _id = {users._id} name={users.name} />
+              <Suggestion key = {users._id} _id = {users._id} name={users.name} openProfile={openProfile} />
             )
           })}
           

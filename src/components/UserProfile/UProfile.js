@@ -2,27 +2,19 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import "../../styles/Profile/Profile.css";
-import ProfileGallery from "./ProfileGallery";
-import ProfileTop from "./ProfileTop";
+import UProfileGallery from "./UProfileGallery";
+import UProfileTop from "./UProfileTop";
 import axios from "axios";
 import { useStateValue } from "../../Reducers/StateProvider";
 import { useParams } from "react-router-dom";
 
-function Profile() {
-  const [username, setUsername] = useState();
-  const [name, setName] = useState();
-  const [userProfile, setUserProfile] = useState();
-  const [{userinfo}, dispatch] = useStateValue();
+function UProfile() {
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [{ userinfo }, dispatch] = useStateValue();
   const { userId } = useParams();
-  
 
-
-
-    
   useEffect(() => {
-    const det = JSON.parse(localStorage.getItem("user"));
-    setUsername(det?.username);
-    setName(det?.name);
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -32,25 +24,30 @@ function Profile() {
     };
 
     axios
-      .get("http://localhost:5000/mypost", axiosConfig)
+      .get(`http://localhost:5000/profile/${userId}`, axiosConfig)
       .then((res) => {
+        setName(res.data.user[0].name);
+        setUsername(res.data.user[0].name);
         dispatch({
-          type: "MY_POST",
-          myposts: res.data.myPost,
+          type: "USER_INFO",
+          userinfo: res.data.user,
+        });
+        dispatch({
+          type: "USER_POST",
+          userpost: res.data.posts,
         });
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
       });
-  }, []);
-
-
+    
+  },[]);
   return (
     <div className="profile">
-      <ProfileTop name={name} username={username} />
-      <ProfileGallery />
+      <UProfileTop name={name} username={username} />
+      <UProfileGallery />
     </div>
   );
 }
 
-export default Profile;
+export default UProfile;

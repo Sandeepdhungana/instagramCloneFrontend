@@ -21,7 +21,7 @@
     margin-left: 1rem;
 }
 
-.sidebar__names > h5 {
+.sidebar__names>a > h5 {
     color: black;
     font-weight: 600;
     margin-bottom: 0.4rem;
