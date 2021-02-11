@@ -1,9 +1,9 @@
 export const initialState = {
   posts: [],
-  myPost:[],
+  myPost: [],
   allusers: [],
-  userinfo:null,
-  userpost:null
+  userinfo: null,
+  userpost: null,
 };
 
 // selector
@@ -13,28 +13,26 @@ const reducer = (state, action) => {
     case "GET_POSTS":
       return {
         ...state,
-        posts: action.posts
+        posts: action.posts,
       };
     case "MY_POST":
-       return {
+      return {
         ...state,
-        myPost: action.myposts
-       }
+        myPost: action.myposts,
+      };
     case "ALL_USERS":
-       return {
+      return {
         ...state,
-        allusers: action.allusers
-       }
+        allusers: action.allusers,
+      };
     case "USER_INFO":
-       return {
-  
-        userinfo: action.userinfo
-       }
+      return {
+        userinfo: action.userinfo,
+      };
     case "USER_POST":
-       return {
-   
-        userpost: action.userpost
-       }
+      return {
+        userpost: action.userpost,
+      };
     default:
       return state;
   }

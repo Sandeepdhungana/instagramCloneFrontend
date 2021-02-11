@@ -23,7 +23,7 @@ function CreatePost() {
 
   
   const postDetails = () => {
-    document.querySelector("#disable").disable = true;
+    document.querySelector("#disable").setAttribute("disabled", true)
     document.querySelector("#disable").innerHTML = "Posting...";
     document.querySelector("#disable").style.backgroundColor = "#B2DFFC";
     const data = new FormData();
@@ -57,18 +57,18 @@ function CreatePost() {
           .catch((err) => {
             console.log("AXIOS ERROR: ", err);
             notify("add to all the fields", toast.error);
-            document.querySelector("#disable").disable = false;
-            document.querySelector("#disable").innerHTML = "Post";
-            document.querySelector("#disable").style.backgroundColor =
-              "#0095F6";
+            // document.querySelector("#disable").setAttribute("disabled", false)
+            // document.querySelector("#disable").innerHTML = "Post";
+            // document.querySelector("#disable").style.backgroundColor =
+            //   "#0095F6";
           });
       })
       .catch(function (err) {
         console.log(err);
         notify("add to all the fields", toast.error);
-        document.querySelector("#disable").disable = false;
-        document.querySelector("#disable").innerHTML = "Post";
-        document.querySelector("#disable").style.backgroundColor = "#0095F6";
+        // document.querySelector("#disable").setAttribute("disabled", false)
+        // document.querySelector("#disable").innerHTML = "Post";
+        // document.querySelector("#disable").style.backgroundColor = "#0095F6";
       });
   };
 

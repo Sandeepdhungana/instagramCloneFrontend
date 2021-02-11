@@ -11,14 +11,9 @@ import { useParams } from "react-router-dom";
 function Profile() {
   const [username, setUsername] = useState();
   const [name, setName] = useState();
-  const [userProfile, setUserProfile] = useState();
-  const [{userinfo}, dispatch] = useStateValue();
-  const { userId } = useParams();
-  
+  const [{ userinfo }, dispatch] = useStateValue();
 
 
-
-    
   useEffect(() => {
     const det = JSON.parse(localStorage.getItem("user"));
     setUsername(det?.username);
@@ -42,8 +37,7 @@ function Profile() {
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
       });
-  }, []);
-
+  });
 
   return (
     <div className="profile">

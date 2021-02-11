@@ -9,6 +9,11 @@
 .image > img:hover {
     filter: brightness(50%); 
 }
+.image {
+    /* display: flex; */
+    margin-right: auto;
+    margin-left: auto;
+}
 @media screen and (max-width:1400px) {
     .image > img {
         height: 14rem;

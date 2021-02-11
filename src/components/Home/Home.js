@@ -8,7 +8,8 @@ import axios from 'axios';
 import { useEffect } from "react";
 
 function Home({openProfile}) {
-  const [{ posts, allusers }, dispatch] = useStateValue();
+  const [{posts, allusers}, dispatch] = useStateValue();
+
 
   useEffect(() => {
     let axiosConfig = {
@@ -31,7 +32,7 @@ function Home({openProfile}) {
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
       });
-  })
+  },[])
   return (
     <div className="home">
       {/* <Header /> */}

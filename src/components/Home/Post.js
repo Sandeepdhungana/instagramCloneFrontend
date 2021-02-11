@@ -113,7 +113,7 @@ function Post({ title, body, photos, postby, _id, like, comments }) {
   const closeModal = () => {
     setIsOpened(false);
   };
-  const deletePost = (id) => {
+  const deletePost = (id,userid) => {
     console.log(id);
     let axiosConfig = {
       headers: {
@@ -124,7 +124,7 @@ function Post({ title, body, photos, postby, _id, like, comments }) {
     };
 
     axios
-      .delete(`http://localhost:5000/delete/${id}`, axiosConfig)
+      .delete(`http://localhost:5000/delete/${id}/${userid}`, axiosConfig)
       .then((res) => {
         console.log("RESPONSE RECEIVED: ", res);
       })
@@ -154,6 +154,7 @@ function Post({ title, body, photos, postby, _id, like, comments }) {
               <Modal
                 closeModal={closeModal}
                 _id={_id}
+                userid={JSON.parse(localStorage.getItem("user"))._id}
                 deletePost={deletePost}
               />
             ) : (
