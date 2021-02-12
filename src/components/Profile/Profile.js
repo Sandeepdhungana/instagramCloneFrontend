@@ -8,7 +8,7 @@ import axios from "axios";
 import { useStateValue } from "../../Reducers/StateProvider";
 import { useParams } from "react-router-dom";
 
-function Profile() {
+function Profile({followers,following}) {
   const [username, setUsername] = useState();
   const [name, setName] = useState();
   const [{ userinfo }, dispatch] = useStateValue();
@@ -41,7 +41,7 @@ function Profile() {
 
   return (
     <div className="profile">
-      <ProfileTop name={name} username={username} />
+      <ProfileTop name={name} username={username} followers={followers} following={following} />
       <ProfileGallery />
     </div>
   );

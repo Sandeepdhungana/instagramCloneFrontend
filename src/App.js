@@ -9,14 +9,15 @@ import Profile from "./components/Profile/Profile";
 import UProfile from "./components/UserProfile/UProfile";
 import CreatePost from "./components/CreatePost/CreatePost";
 import Signup from "./components/Signup/Signup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { useStateValue } from "./Reducers/StateProvider";
 
-const Routing = () => {
+const Routing = () => {  
   const [state, dispatch] = useStateValue();
+ 
   // const [post, setPost] = useState();
   
   const notify = () => toast.error("You must login to continue or create account", {autoClose:2000});
@@ -55,6 +56,32 @@ const Routing = () => {
       });
   })
   
+  
+  useEffect(() => {
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    };
+  
+    axios
+      .get("http://localhost:5000/myinfo", axiosConfig)
+      .then((res) => {
+        dispatch({
+          type:"FOLLOWERS",
+          followers:res.data.user[0]?.followers
+        })
+        dispatch({
+          type:"FOLLOWING",
+          following:res.data.user[0]?.following
+        })
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      });
+  })
   
 
   return (

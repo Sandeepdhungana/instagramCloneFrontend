@@ -6,30 +6,8 @@ import { useStateValue } from "../../Reducers/StateProvider";
 import axios from 'axios'
 
 function ProfileTop({name, username}) {
-  const [{myPost}, dispatch] = useStateValue();
-  const [followers, setFollowers] = useState(null);
-  const [following, setFollowing] = useState(null);
-  useEffect(() => {
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+  const [{myPost,following,followers}, dispatch] = useStateValue();
   
-    axios
-      .get("http://localhost:5000/myinfo", axiosConfig)
-      .then((res) => {
-        setFollowers(res.data.user[0].followers.length)
-        setFollowing(res.data.user[0].following.length)
-      })
-      .catch((err) => {
-        console.log("AXIOS ERROR: ", err);
-      });
-  },[])
-  
-
   return (
     <div className="profiletop">
       <div className="profiletop__circularImage">
@@ -62,10 +40,10 @@ function ProfileTop({name, username}) {
             <span>{myPost?.length}</span> posts
           </p>
           <p>
-            <span>{followers}</span> followers
+            <span>{followers?.length}</span> followers
           </p>
           <p>
-            <span>{following}</span> following
+            <span>{following?.length}</span> following
           </p>
         </div>
         <div className="profiletop__bios">

@@ -1,15 +1,47 @@
 /* eslint-disable no-unused-vars */
 import { Avatar } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/Home/Suggestions.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useStateValue } from "../../Reducers/StateProvider";
 
 function Suggestion({ _id, name }) {
-  const [state, dispatch] = useStateValue();
+  const [{ following }, dispatch] = useStateValue();
+  const [followed, setFollowed] = useState(null);
 
+  const isFollowed = following?.includes(_id);
+  useEffect(() => {
+    setFollowed(isFollowed);
+  },[isFollowed]);
+
+  
+
+  const unfollow = (followid) => {
+    setFollowed(false);
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    };
+    const userId = {
+      followid,
+    };
+    axios
+      .put(`http://localhost:5000/unfollow`, userId, axiosConfig)
+      .then((res) => {
+        // console.log(res.data.users.following);
+        // console.log(res.data.users.followers);
+        // console.log("Followed.");
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      });
+  };
   const follow = (followid) => {
+    setFollowed(false);
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -25,19 +57,14 @@ function Suggestion({ _id, name }) {
       .then((res) => {
         // console.log(res.data.users.following);
         // console.log(res.data.users.followers);
-        dispatch({
-          type: "FOLLOW",
-          followe: {
-            followers: res.data.users.followers,
-            following: res.data.users.following,
-          },
-        });
+        // console.log("Followed.");
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
       });
   };
 
+  console.log(isFollowed);
   var route = "/profile/" + _id;
   return (
     <div className="suggestion">
@@ -53,10 +80,10 @@ function Suggestion({ _id, name }) {
       <div className="suggestion__right">
         <p
           onClick={() => {
-            follow(_id);
+            followed?unfollow(_id):follow(_id);
           }}
         >
-          Follow
+          {followed ? "Unfollow" : "Follow"}
         </p>
       </div>
     </div>

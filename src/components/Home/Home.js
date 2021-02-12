@@ -10,7 +10,6 @@ import { useEffect } from "react";
 function Home({openProfile}) {
   const [{posts, allusers}, dispatch] = useStateValue();
 
-
   useEffect(() => {
     let axiosConfig = {
       headers: {
@@ -63,7 +62,7 @@ function Home({openProfile}) {
           </div>
           {allusers?.slice(0,5).map((users,index) => {
             return (
-              <Suggestion key = {users._id} _id = {users._id} name={users.name} openProfile={openProfile} />
+              <Suggestion key = {users._id} _id = {users._id} name={users.name}/>
             )
           })}
           

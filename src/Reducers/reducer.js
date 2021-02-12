@@ -4,6 +4,8 @@ export const initialState = {
   allusers: [],
   userinfo: null,
   userpost: null,
+  following:null,
+  followers: null,
 };
 
 // selector
@@ -32,6 +34,16 @@ const reducer = (state, action) => {
     case "USER_POST":
       return {
         userpost: action.userpost,
+      };
+    case "FOLLOWERS":
+      return {
+        ...state,
+        followers: action.followers,
+      };
+    case "FOLLOWING":
+      return {
+        ...state,
+        following: action.following,
       };
     default:
       return state;
