@@ -7,14 +7,21 @@ import UProfileTop from "./UProfileTop";
 import axios from "axios";
 import { useStateValue } from "../../Reducers/StateProvider";
 import { useParams } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 function UProfile() {
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(null);
   const [name, setName] = useState("");
-  const [{ userinfo }, dispatch] = useStateValue();
+  const [state, dispatch] = useStateValue();
   const { userId } = useParams();
+  const [follow, setFollow] = useState({
+    followers:null,
+    following:null
+  })
 
-  useEffect(() => {
+  const userProfile = () => {
+    setLoading(true);
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -26,26 +33,34 @@ function UProfile() {
     axios
       .get(`http://localhost:5000/profile/${userId}`, axiosConfig)
       .then((res) => {
+        
+        setLoading(false);
         setName(res.data.user[0].name);
         setUsername(res.data.user[0].name);
-        dispatch({
-          type: "USER_INFO",
-          userinfo: res.data.user,
-        });
+        setFollow({
+          followers:res.data.user[0].followers,
+          following:res.data.user[0].following
+        })
         dispatch({
           type: "USER_POST",
           userpost: res.data.posts,
         });
+        
       })
       .catch((err) => {
         console.log("AXIOS ERROR: ", err);
       });
+  };
+
+  useEffect(() => {
+    userProfile();
     
   },[]);
+
   return (
     <div className="profile">
-      <UProfileTop name={name} username={username} />
-      <UProfileGallery />
+      {loading?<Loader/>:<><UProfileTop name={name} username={username} followw= {follow} />
+      <UProfileGallery /></>}
     </div>
   );
 }

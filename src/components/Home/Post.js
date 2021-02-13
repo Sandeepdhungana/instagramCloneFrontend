@@ -113,7 +113,7 @@ function Post({ title, body, photos, postby, _id, like, comments }) {
   const closeModal = () => {
     setIsOpened(false);
   };
-  const deletePost = (id,userid) => {
+  const deletePost = (id, userid) => {
     console.log(id);
     let axiosConfig = {
       headers: {

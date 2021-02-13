@@ -15,7 +15,6 @@ function Suggestion({ _id, name }) {
     setFollowed(isFollowed);
   },[isFollowed]);
 
-  
 
   const unfollow = (followid) => {
     setFollowed(false);
@@ -64,7 +63,6 @@ function Suggestion({ _id, name }) {
       });
   };
 
-  console.log(isFollowed);
   var route = "/profile/" + _id;
   return (
     <div className="suggestion">

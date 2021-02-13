@@ -1,15 +1,16 @@
-import React from 'react'
+import React from "react";
 
-import '../../styles/Profile/Image.css'
+import "../../styles/Profile/Image.css";
+import Slide from "react-reveal/Slide";
 
-
-function Image({image}) {
-    
-    return (
-        <div className="image">
-            <img src={image} alt=""/>
-        </div>
-    )
+function Image({ image }) {
+  return (
+    <Slide left>
+      <div className="image">
+        <img src={image} alt="" />
+      </div>
+    </Slide>
+  );
 }
 
-export default Image
+export default Image;

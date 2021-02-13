@@ -6,6 +6,7 @@ import "../../styles/Home/Home.css";
 import { useStateValue } from "../../Reducers/StateProvider";
 import axios from 'axios';
 import { useEffect } from "react";
+import Slide from 'react-reveal/Slide';
 
 function Home({openProfile}) {
   const [{posts, allusers}, dispatch] = useStateValue();
@@ -41,6 +42,7 @@ function Home({openProfile}) {
           <Story />
           {posts?.map((postsData) => {
             return (
+              <Slide right>
               <Post
                 key={postsData._id}
                 _id={postsData._id}
@@ -51,6 +53,7 @@ function Home({openProfile}) {
                 like={postsData.likes}
                 comments={postsData.comments}
               />
+              </Slide>
             );
           })}
         </div>

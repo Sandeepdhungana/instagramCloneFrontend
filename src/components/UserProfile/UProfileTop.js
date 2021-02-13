@@ -1,12 +1,71 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/Profile/ProfileTop.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useStateValue } from "../../Reducers/StateProvider";
+import axios from "axios";
 
-function UProfileTop({name, username}) {
-  const [{userpost, userinfo}] = useStateValue();
+function UProfileTop({name, username,followw}) {
+  const [{userpost,following}] = useStateValue();
+
+  const {userId} = useParams();
   
+  const [followed, setFollowed] = useState(null);
+  
+  const isFollowed = following?.includes(userId);
+  
+  useEffect(() => {
+    setFollowed(isFollowed);
+  },[isFollowed]);
+
+  
+  
+  const unfollow = (followid) => {
+    setFollowed(false);
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    };
+    const userId = {
+      followid,
+    };
+    axios
+      .put(`http://localhost:5000/unfollow`, userId, axiosConfig)
+      .then((res) => {
+        // console.log(res.data.users.following);
+        // console.log(res.data.users.followers);
+        // console.log("Followed.");
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      });
+  };
+  const follow = (followid) => {
+    setFollowed(false);
+    let axiosConfig = {
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8",
+        "Access-Control-Allow-Origin": "*",
+        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    };
+    const userId = {
+      followid,
+    };
+    axios
+      .put(`http://localhost:5000/follow`, userId, axiosConfig)
+      .then((res) => {
+        // console.log(res.data.users.following);
+        // console.log(res.data.users.followers);
+        // console.log("Followed.");
+      })
+      .catch((err) => {
+        console.log("AXIOS ERROR: ", err);
+      });
+  };
   return (
     <div className="profiletop">
       <div className="profiletop__circularImage">
@@ -18,7 +77,7 @@ function UProfileTop({name, username}) {
       <div className="profiletop__info">
         <div className="profiletop__names">
           <p>{username}</p>
-            <div className="followButton"><button>Follow</button></div>
+            <div className="followButton">{followed?<button onClick={() => {unfollow(userId)}}>Unollow</button>:<button onClick={() => {follow(userId)}}>Follow</button>}</div>
           <svg
             fill="#262626"
             height="24"
@@ -37,10 +96,10 @@ function UProfileTop({name, username}) {
             <span>{userpost?.length}</span> posts
           </p>
           <p>
-            <span>101</span> followers
+            <span>{followw.followers?.length}</span> followers
           </p>
           <p>
-            <span>100</span> following
+            <span>{followw.following?.length}</span> following
           </p>
         </div>
         <div className="profiletop__bios">
