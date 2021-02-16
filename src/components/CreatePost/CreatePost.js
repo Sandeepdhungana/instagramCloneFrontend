@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { axiosConfig } from "../axiosConfig";
 
 function CreatePost() {
   const history = useHistory();
@@ -39,16 +40,10 @@ function CreatePost() {
           body,
           picUrl: response.data.url,
         };
-        let axiosConfig = {
-          headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-            authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        };
+      
 
         axios
-          .post("http://localhost:5000/createpost", postData, axiosConfig)
+          .post("/createpost", postData, axiosConfig)
           .then((res) => {
             console.log("RESPONSE RECEIVED: ", res);
             notify("Successfully posted.", toast.success);

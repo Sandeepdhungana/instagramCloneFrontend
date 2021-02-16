@@ -7,21 +7,16 @@ import { useStateValue } from "../../Reducers/StateProvider";
 import axios from 'axios';
 import { useEffect } from "react";
 import Slide from 'react-reveal/Slide';
+import { axiosConfig } from "../axiosConfig";
 
 function Home({openProfile}) {
   const [{posts, allusers}, dispatch] = useStateValue();
 
   useEffect(() => {
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+   
   
     axios
-      .get("http://localhost:5000/allusers", axiosConfig)
+      .get("/allusers", axiosConfig)
       .then((res) => {
         // console.log(res?.data.alluser);
         dispatch({

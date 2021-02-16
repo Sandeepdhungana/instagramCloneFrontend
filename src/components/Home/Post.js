@@ -6,6 +6,7 @@ import "../../styles/Home/Post.css";
 import MoreHorizOutlinedIcon from "@material-ui/icons/MoreHorizOutlined";
 import axios from "axios";
 import Modal from "./Modal";
+import { axiosConfig } from "../axiosConfig";
 
 function Post({ title, body, photos, postby, _id, like, comments }) {
   const [areSameUser, setareSameUser] = useState(
@@ -37,20 +38,14 @@ function Post({ title, body, photos, postby, _id, like, comments }) {
   };
 
   const postComment = (_id) => {
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+ 
     var post = {
       text: comment,
       _id,
     };
 
     axios
-      .put("http://localhost:5000/comments", post, axiosConfig)
+      .put("/comments", post, axiosConfig)
       .then((res) => {
         console.log("RESPONSE RECEIVED: ", res.comments);
       })
@@ -65,18 +60,11 @@ function Post({ title, body, photos, postby, _id, like, comments }) {
   const likepost = (_id) => {
     setLiked(true);
 
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
     var postId = {
       _id,
     };
     axios
-      .put("http://localhost:5000/like", postId, axiosConfig)
+      .put("/like", postId, axiosConfig)
       .then((res) => {
         console.log("RESPONSE RECEIVED: ", res);
       })
@@ -87,19 +75,11 @@ function Post({ title, body, photos, postby, _id, like, comments }) {
   const unlikepost = (_id) => {
     setLiked(false);
 
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
-
     var postId = {
       _id,
     };
     axios
-      .put("http://localhost:5000/unlike", postId, axiosConfig)
+      .put("/unlike", postId, axiosConfig)
       .then((res) => {
         console.log("RESPONSE RECEIVED: ", res);
       })
@@ -115,16 +95,9 @@ function Post({ title, body, photos, postby, _id, like, comments }) {
   };
   const deletePost = (id, userid) => {
     console.log(id);
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
 
     axios
-      .delete(`http://localhost:5000/delete/${id}/${userid}`, axiosConfig)
+      .delete(`/delete/${id}/${userid}`, axiosConfig)
       .then((res) => {
         console.log("RESPONSE RECEIVED: ", res);
       })

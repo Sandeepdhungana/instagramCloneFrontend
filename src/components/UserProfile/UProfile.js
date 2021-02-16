@@ -8,6 +8,7 @@ import axios from "axios";
 import { useStateValue } from "../../Reducers/StateProvider";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
+import { axiosConfig } from "../axiosConfig";
 
 function UProfile() {
   const [username, setUsername] = useState("");
@@ -22,16 +23,10 @@ function UProfile() {
 
   const userProfile = () => {
     setLoading(true);
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+    
 
     axios
-      .get(`http://localhost:5000/profile/${userId}`, axiosConfig)
+      .get(`/profile/${userId}`, axiosConfig)
       .then((res) => {
         
         setLoading(false);

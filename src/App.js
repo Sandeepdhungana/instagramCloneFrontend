@@ -9,12 +9,13 @@ import Profile from "./components/Profile/Profile";
 import UProfile from "./components/UserProfile/UProfile";
 import CreatePost from "./components/CreatePost/CreatePost";
 import Signup from "./components/Signup/Signup";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useStateValue } from "./Reducers/StateProvider";
 import Slide from "react-reveal/Slide";
+import { axiosConfig } from "./components/axiosConfig";
 
 const Routing = () => {
   const [{ posts }, dispatch] = useStateValue();
@@ -36,16 +37,10 @@ const Routing = () => {
   }, []);
 
   const getPosts = () => {
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+   
 
     axios
-      .get("http://localhost:5000/allpost", axiosConfig)
+      .get("/allpost", axiosConfig)
       .then((res) => {
         // setPost(res.data.posts)
         dispatch({
@@ -59,16 +54,10 @@ const Routing = () => {
   };
 
   const getMyInfo = () => {
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+    
 
     axios
-      .get("http://localhost:5000/myinfo", axiosConfig)
+      .get("/myinfo", axiosConfig)
       .then((res) => {
         dispatch({
           type: "FOLLOWERS",

@@ -7,6 +7,7 @@ import ProfileTop from "./ProfileTop";
 import axios from "axios";
 import { useStateValue } from "../../Reducers/StateProvider";
 import Loader from '../../components/Loader/Loader'
+import { axiosConfig } from "../axiosConfig";
 
 function Profile({ followers, following }) {
   const [username, setUsername] = useState();
@@ -19,16 +20,10 @@ function Profile({ followers, following }) {
     const det = JSON.parse(localStorage.getItem("user"));
     setUsername(det?.username);
     setName(det?.name);
-    let axiosConfig = {
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+  
 
     axios
-      .get("http://localhost:5000/mypost", axiosConfig)
+      .get("/mypost", axiosConfig)
       .then((res) => {
         setLoading(false)
         dispatch({
@@ -43,11 +38,6 @@ function Profile({ followers, following }) {
 
   useEffect(() => {
     getMyPost();
-    const interval = setInterval(() => {
-      getMyPost();
-    }, 10000);
-
-    return () => clearInterval(interval);
   }, []);
 
   return (

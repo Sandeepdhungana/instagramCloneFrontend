@@ -25,7 +25,7 @@ function Signup({ name }) {
       return notify("Enter a valid email to signup", toast.error);
     }
     axios
-      .post("http://localhost:5000/signup", {
+      .post("https://instagram-by-sandeep.herokuapp.com/signup", {
         name: fullName,
         email,
         username,

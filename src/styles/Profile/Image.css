@@ -3,11 +3,12 @@
     width: 17rem;
     cursor: pointer;
     margin-bottom: 1.3rem;
-    object-fit: cover;
+    /* object-fit: contain; */
     position: relative;
+    transition:.5s ease;
 }
 .image > img:hover {
-    filter: brightness(50%); 
+    filter: brightness(50%);
 }
 .image {
     /* display: flex; */

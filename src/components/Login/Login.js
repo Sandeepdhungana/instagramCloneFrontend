@@ -23,7 +23,7 @@ function Login() {
       return notify("Enter a valid email to login", toast.error);
     }
     axios
-      .post("http://localhost:5000/login", {
+      .post("https://instagram-by-sandeep.herokuapp.com/login", {
         email,
         password,
       })
